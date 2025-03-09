@@ -5,6 +5,8 @@ import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { isMobile } from "react-device-detect";
+import { useState, useEffect } from "react";
 
 const images = [
   "/drink1.jpg",
@@ -20,7 +22,20 @@ const images = [
 ];
 
 export default function Carousel() {
-  const settings = {
+  
+const [showArrows, setShowArrows] = useState(true);
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setShowArrows(window.innerWidth >= 768); // Hide arrows on screens < 768px (mobile)
+    };
+
+    checkScreenSize(); // Run on mount
+    window.addEventListener("resize", checkScreenSize); // Update on resize
+
+    return () => window.removeEventListener("resize", checkScreenSize); // Cleanup
+  }, []);
+    const settings = {
     dots: true,
     infinite: true,
     speed: 500,
@@ -28,7 +43,7 @@ export default function Carousel() {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 3000,
-    arrows: true,
+    arrows: showArrows,
   };
 
   return (
