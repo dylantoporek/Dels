@@ -1,7 +1,7 @@
-# Del's — A Modern Speakeasy
+# Del's
 
-The website for Del's, a hidden cocktail bar behind an unmarked door. Dark,
-candlelit, art-deco styling with classic and original cocktail menus.
+The website for Del's — cocktails and light bites. Dark navy, hand-drawn
+tally-mark branding, and ink-sketch paper menus.
 
 Built with [Next.js](https://nextjs.org) (App Router) and
 [Tailwind CSS v4](https://tailwindcss.com).
@@ -24,13 +24,15 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Design Notes
 
-- **Typography**: Great Vibes (script wordmark), Cinzel (engraved small-caps
-  labels), Cormorant Garamond (body), loaded via `next/font`.
-- **Palette**: near-black backgrounds with antique gold accents, defined as
-  CSS variables in `src/app/globals.css`.
-- **Art-deco details**: double-ruled frames (`.deco-frame`), diamond dividers
-  (`.deco-divider`), and dotted menu leaders (`.menu-leader`) are reusable
-  utility classes in `globals.css`.
+- **Typography**: Permanent Marker (wordmark), Architects Daughter (menu
+  handwriting), Space Mono (letterspaced labels), loaded via `next/font`;
+  Helvetica stack for body text.
+- **Palette**: dark navy background with off-white text and a rust-red
+  accent; paper-white menu sheets with black ink. Defined as CSS variables
+  in `src/app/globals.css`.
+- **Brand details**: the tally-mark motif is `src/app/components/hatch.tsx`;
+  hand-sketched glassware is `src/app/components/glass.tsx`; handwritten
+  underlines use the `.hand-rule` class in `globals.css`.
 
 ## Deploy
 

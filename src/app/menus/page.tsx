@@ -1,176 +1,122 @@
 import type { Metadata } from "next";
+import Hatch from "../components/hatch";
+import Glass, { type GlassVariant } from "../components/glass";
 
 export const metadata: Metadata = {
   title: "Menus — Del's",
-  description:
-    "Classic and original cocktails, zero-proof drinks, and small plates at Del's speakeasy.",
+  description: "Cocktails and light bites at Del's.",
 };
 
-type Item = {
-  name: string;
-  detail: string;
-  price: string;
-};
-
-type Section = {
-  title: string;
-  note?: string;
-  items: Item[];
-};
-
-const sections: Section[] = [
+const cocktails: { name: string; detail: string; glass: GlassVariant }[] = [
   {
-    title: "House Cocktails",
-    note: "Originals, poured until the shaker gives out.",
-    items: [
-      {
-        name: "The Unmarked Door",
-        detail: "rye, walnut bitters, demerara, smoked glass",
-        price: "17",
-      },
-      {
-        name: "Green Light",
-        detail: "gin, chartreuse, lime, celery shrub",
-        price: "16",
-      },
-      {
-        name: "Midnight Edition",
-        detail: "mezcal, coffee liqueur, cacao, orange oil",
-        price: "17",
-      },
-      {
-        name: "Del's Word",
-        detail: "our take on the Last Word — gin, maraschino, lime, yellow chartreuse",
-        price: "16",
-      },
-      {
-        name: "Paper Alibi",
-        detail: "bourbon, amaro, lemon, honey, dash of absinthe",
-        price: "16",
-      },
-    ],
+    name: "Aperitivo",
+    detail: "vermouth, soda, lemon twist",
+    glass: "collins",
   },
   {
-    title: "The Classics",
-    note: "Made the way they were before anyone wrote them down wrong.",
-    items: [
-      {
-        name: "Old Fashioned",
-        detail: "bourbon or rye, sugar, bitters, one big rock",
-        price: "15",
-      },
-      {
-        name: "Bee's Knees",
-        detail: "gin, honey, lemon — a Prohibition original",
-        price: "14",
-      },
-      {
-        name: "French 75",
-        detail: "gin, lemon, sugar, champagne",
-        price: "16",
-      },
-      {
-        name: "Sidecar",
-        detail: "cognac, cointreau, lemon, sugared rim",
-        price: "16",
-      },
-      {
-        name: "Corpse Reviver No. 2",
-        detail: "gin, lillet blanc, cointreau, lemon, absinthe rinse",
-        price: "15",
-      },
-    ],
+    name: "S.G.D.",
+    detail: "sake, gin, green chartreuse, sugar, lemon, grapefruit twist",
+    glass: "rocks",
   },
   {
-    title: "Zero Proof",
-    note: "All of the ceremony, none of the evidence.",
-    items: [
-      {
-        name: "Teetotaler's Sour",
-        detail: "seedlip grove, lemon, orgeat, aquafaba",
-        price: "11",
-      },
-      {
-        name: "Shirley's Temple",
-        detail: "house grenadine, lime, soda, brandied cherry",
-        price: "9",
-      },
-      {
-        name: "Garden Party",
-        detail: "cucumber, mint, tonic, celery bitters",
-        price: "10",
-      },
-    ],
+    name: "Roman Negroni",
+    detail: "mezcal, vermouth bianco, genepy, amaro, orange twist",
+    glass: "rocks",
   },
   {
-    title: "Small Plates",
-    note: "Enough to keep you honest.",
-    items: [
-      {
-        name: "Deviled Eggs",
-        detail: "smoked paprika, chive, pickled mustard seed",
-        price: "9",
-      },
-      {
-        name: "Olives & Almonds",
-        detail: "castelvetrano, marcona, orange peel",
-        price: "8",
-      },
-      {
-        name: "Charcuterie Board",
-        detail: "rotating cuts, aged cheese, house pickles, bread",
-        price: "22",
-      },
-      {
-        name: "Chocolate Pot de Crème",
-        detail: "dark chocolate, sea salt, whipped cream",
-        price: "10",
-      },
-    ],
+    name: "Del's June Martini",
+    detail:
+      "olive oil fat washed dill-infused gin, vermouth bianco, bitters, feta, tomato",
+    glass: "wine",
+  },
+  {
+    name: "Limoncello Milk Punch",
+    detail:
+      "limoncello, white rum, genepy, amaro, brandy, earl grey tea, lemon, bitters, milk",
+    glass: "rocks",
+  },
+  {
+    name: "Del's Iced Tea",
+    detail: "black tea, lemon, sugar",
+    glass: "rocks",
+  },
+  {
+    name: "The Coke",
+    detail: "amaro, ginger liquor, soda, lemon twist",
+    glass: "soda",
   },
 ];
 
+const bites = [
+  { name: "Crunchy", detail: "sea salt & vinegar chips" },
+  { name: "Briney", detail: "marinated olives, pickles, & peppers" },
+  { name: "Savory", detail: "aged manchego" },
+  { name: "Spicy", detail: "chorizo picante" },
+  { name: "Sweet", detail: "coffee chip ice cream & brandy" },
+];
+
+function PaperHeader() {
+  return (
+    <div className="flex flex-col items-center">
+      <span className="marker text-4xl">DEL&apos;S</span>
+      <Hatch strokes={14} className="mt-2 h-6 w-32" />
+    </div>
+  );
+}
+
 export default function Menus() {
   return (
-    <div className="mx-auto max-w-3xl px-6 py-20">
+    <div className="mx-auto max-w-4xl px-6 py-20">
       <header className="flex flex-col items-center text-center">
-        <p className="deco-label text-gold">The Menus</p>
-        <h1 className="mt-4 text-5xl font-light md:text-6xl">
-          Tonight&apos;s Pour
-        </h1>
-        <div className="deco-divider mt-8 w-40 text-gold">&#9670;</div>
-        <p className="mt-6 max-w-md text-lg italic text-muted">
-          The list changes with the seasons and the bartender&apos;s mood.
-          Ask what&apos;s off the menu.
+        <p className="mono-label text-foreground/80">The Menus</p>
+        <Hatch strokes={10} className="mt-4 h-4 w-16 text-accent" />
+        <p className="mono-label mt-6 text-muted">
+          The list rotates &mdash; every menu is dated, drawn, and retired
         </p>
       </header>
 
-      <div className="mt-16 space-y-14">
-        {sections.map(({ title, note, items }) => (
-          <section key={title} className="deco-frame p-8 md:p-12">
-            <h2 className="deco-label text-center text-gold">{title}</h2>
-            {note && (
-              <p className="mt-3 text-center text-lg italic text-muted">
-                {note}
+      {/* Cocktails — a printed sheet */}
+      <section className="mt-14 bg-paper p-8 text-ink shadow-2xl md:p-14">
+        <PaperHeader />
+        <ul className="mt-12 grid gap-x-12 gap-y-12 md:grid-cols-2">
+          {cocktails.map(({ name, detail, glass }, i) => (
+            <li
+              key={name}
+              className={`flex items-start gap-5 ${
+                i === cocktails.length - 1 ? "md:col-span-2 md:justify-center" : ""
+              }`}
+            >
+              <Glass variant={glass} className="h-16 w-12 shrink-0" />
+              <div>
+                <h2 className="hand hand-rule text-2xl uppercase">{name}</h2>
+                <p className="hand mt-2 text-lg uppercase leading-snug text-ink/80">
+                  {detail}
+                </p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* Light bites — a second sheet */}
+      <section className="mt-10 bg-paper p-8 text-ink shadow-2xl md:p-14">
+        <PaperHeader />
+        <ul className="mt-12 grid gap-x-12 gap-y-10 md:grid-cols-2">
+          {bites.map(({ name, detail }, i) => (
+            <li
+              key={name}
+              className={`text-center ${
+                i === bites.length - 1 ? "md:col-span-2" : ""
+              }`}
+            >
+              <h2 className="hand hand-rule text-2xl uppercase">{name}</h2>
+              <p className="hand mt-2 text-lg uppercase leading-snug text-ink/80">
+                {detail}
               </p>
-            )}
-            <ul className="mt-8 space-y-6">
-              {items.map(({ name, detail, price }) => (
-                <li key={name}>
-                  <div className="flex items-baseline text-xl">
-                    <span className="font-medium">{name}</span>
-                    <span className="menu-leader" aria-hidden />
-                    <span className="text-gold">{price}</span>
-                  </div>
-                  <p className="mt-1 text-lg font-light italic text-foreground/60">
-                    {detail}
-                  </p>
-                </li>
-              ))}
-            </ul>
-          </section>
-        ))}
-      </div>
+            </li>
+          ))}
+        </ul>
+      </section>
     </div>
   );
 }
