@@ -1,27 +1,136 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #100e0b;
+  --surface: #17140f;
+  --surface-raised: #1e1a13;
+  --foreground: #ece3d0;
+  --muted: #9b9080;
+  --gold: #c9a25b;
+  --gold-bright: #e3c284;
+  --gold-dim: #8a6f3e;
+  --line: rgba(201, 162, 91, 0.25);
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-muted: var(--muted);
+  --color-gold: var(--gold);
+  --color-gold-bright: var(--gold-bright);
+  --color-gold-dim: var(--gold-dim);
+  --color-line: var(--line);
+  --font-serif: var(--font-cormorant);
+  --font-script: var(--font-script);
+  --font-caps: var(--font-cinzel);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-  max-height: 100%;
+  font-family: var(--font-cormorant), Georgia, serif;
+  min-height: 100dvh;
+  /* Faint candlelight glow behind the content */
+  background-image: radial-gradient(
+      ellipse 80% 50% at 50% -10%,
+      rgba(201, 162, 91, 0.08),
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 60% 40% at 50% 110%,
+      rgba(201, 162, 91, 0.05),
+      transparent 70%
+    );
+}
+
+::selection {
+  background: var(--gold);
+  color: var(--background);
+}
+
+/* Engraved small-caps labels used for nav links, section eyebrows, buttons */
+.deco-label {
+  font-family: var(--font-cinzel), Georgia, serif;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  font-size: 0.72rem;
+}
+
+/* The Del's script wordmark */
+.script {
+  font-family: var(--font-script), cursive;
+}
+
+/* Gold hairline with a diamond at the center: ────◆──── */
+.deco-divider {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--gold);
+}
+.deco-divider::before,
+.deco-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to var(--dir, right), transparent, var(--line));
+}
+.deco-divider::before {
+  --dir: right;
+}
+.deco-divider::after {
+  --dir: left;
+}
+
+/* Double-ruled art deco frame for cards and panels */
+.deco-frame {
+  position: relative;
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+.deco-frame::before {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border: 1px solid rgba(201, 162, 91, 0.12);
+  pointer-events: none;
+}
+
+/* Dotted leader between a menu item's name and price */
+.menu-leader {
+  flex: 1;
+  margin: 0 0.6em;
+  border-bottom: 1px dotted rgba(201, 162, 91, 0.35);
+  transform: translateY(-0.35em);
+}
+
+/* Slow fade-up for hero content */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.rise {
+  animation: rise 0.9s ease-out both;
+}
+.rise-late {
+  animation: rise 0.9s ease-out 0.35s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise,
+  .rise-late {
+    animation: none;
+  }
 }

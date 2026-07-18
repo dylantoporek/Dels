@@ -1,48 +1,34 @@
-"use client";
-
 import Link from "next/link";
-import { useState, useEffect } from "react";
-import { isMobile as detectMobile } from "react-device-detect";
+
+const links = [
+  { href: "/about", label: "About" },
+  { href: "/menus", label: "Menus" },
+  { href: "/contact", label: "Contact" },
+];
 
 export default function Navbar() {
-    const [isMobile, setIsMobile] = useState(false);
-
-    useEffect(() => {
-        // Function to check screen width
-        const checkScreenSize = () => {
-            setIsMobile(window.innerWidth < 768); // Mobile = <768px
-        };
-
-        checkScreenSize(); // Check once on mount
-        window.addEventListener("resize", checkScreenSize); // Listen for window resize
-
-        return () => window.removeEventListener("resize", checkScreenSize); // Cleanup
-    }, []); 
-    return isMobile ? (
-        <div className="flex flex-col justify-between items-center font-[family-name:var(--font-geist-sans)]">
-            <div className='w-[300px] min-w-[300px]'>
-                <Link href="/">
-                <img src='del_logo_resized.jpg'></img>
-                </Link>
-            </div>
-            <div className="flex w-[100%] justify-around p-4">
-                <Link href="/about">About</Link>
-                <Link href="/menus">Menus</Link>
-                <Link href="/contact">Contact</Link>
-            </div>
-      </div>
-    ) : (
-        <div className="flex justify-between items-center font-[family-name:var(--font-geist-sans)]">
-            <div className='w-[300px] min-w-[300px]'>
-                <Link href="/">
-                <img src='del_logo_resized.jpg'></img>
-                </Link>
-            </div>
-            <div className="flex w-[60%] justify-around p-4">
-            <Link href="/about">About</Link>
-            <Link href="/menus">Menus</Link>
-            <Link href="/contact">Contact</Link>
-            </div>
-      </div>  
-    )
+  return (
+    <header className="border-b border-line">
+      <nav className="mx-auto flex max-w-5xl flex-col items-center gap-3 px-6 py-5 md:flex-row md:justify-between md:gap-8">
+        <Link
+          href="/"
+          className="script text-4xl text-gold transition-colors hover:text-gold-bright"
+        >
+          Del&apos;s
+        </Link>
+        <ul className="flex items-center gap-8 md:gap-10">
+          {links.map(({ href, label }) => (
+            <li key={href}>
+              <Link
+                href={href}
+                className="deco-label text-foreground/80 transition-colors hover:text-gold-bright"
+              >
+                {label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </header>
+  );
 }
