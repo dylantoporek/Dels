@@ -1,33 +1,35 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Cinzel, Great_Vibes } from "next/font/google";
+import {
+  Space_Mono,
+  Permanent_Marker,
+  Architects_Daughter,
+} from "next/font/google";
 import "./globals.css";
 
 import Navbar from "./components/navbar";
 import Footer from "./components/footer";
 
-const cormorant = Cormorant_Garamond({
-  variable: "--font-cormorant",
+const spaceMono = Space_Mono({
+  variable: "--font-space-mono",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-  style: ["normal", "italic"],
+  weight: ["400", "700"],
 });
 
-const cinzel = Cinzel({
-  variable: "--font-cinzel",
+const marker = Permanent_Marker({
+  variable: "--font-marker",
   subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: "400",
 });
 
-const greatVibes = Great_Vibes({
-  variable: "--font-script",
+const hand = Architects_Daughter({
+  variable: "--font-hand",
   subsets: ["latin"],
   weight: "400",
 });
 
 export const metadata: Metadata = {
-  title: "Del's — A Modern Speakeasy",
-  description:
-    "Del's is a hidden cocktail bar pouring classic and original cocktails behind an unmarked door. Find us if you can.",
+  title: "Del's",
+  description: "Del's — cocktails and light bites.",
 };
 
 export default function RootLayout({
@@ -38,7 +40,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${cormorant.variable} ${cinzel.variable} ${greatVibes.variable} antialiased flex min-h-dvh flex-col`}
+        className={`${spaceMono.variable} ${marker.variable} ${hand.variable} antialiased flex min-h-dvh flex-col`}
       >
         <Navbar />
         <main className="flex-1">{children}</main>

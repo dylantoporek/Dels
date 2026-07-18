@@ -1,36 +1,34 @@
 import Link from "next/link";
+import Hatch from "./hatch";
 
 export default function Footer() {
   return (
     <footer className="border-t border-line">
       <div className="mx-auto flex max-w-5xl flex-col items-center gap-4 px-6 py-10 text-center">
-        <span className="script text-3xl text-gold">Del&apos;s</span>
-        <p className="deco-label text-muted">
-          Speak easy &middot; Drink well &middot; Tell no one
-        </p>
+        <span className="marker text-2xl">DEL&apos;S</span>
+        <Hatch strokes={14} className="h-4 w-24 text-foreground/60" />
         <nav className="flex gap-6">
           <Link
             href="/about"
-            className="deco-label text-foreground/60 transition-colors hover:text-gold-bright"
+            className="mono-label text-foreground/60 transition-colors hover:text-accent"
           >
             About
           </Link>
           <Link
             href="/menus"
-            className="deco-label text-foreground/60 transition-colors hover:text-gold-bright"
+            className="mono-label text-foreground/60 transition-colors hover:text-accent"
           >
             Menus
           </Link>
           <Link
             href="/contact"
-            className="deco-label text-foreground/60 transition-colors hover:text-gold-bright"
+            className="mono-label text-foreground/60 transition-colors hover:text-accent"
           >
             Contact
           </Link>
         </nav>
-        <p className="text-sm text-muted">
-          &copy; {new Date().getFullYear()} Del&apos;s. If you found us, keep it
-          quiet.
+        <p className="mono-label text-muted">
+          &copy; {new Date().getFullYear()} &middot; Del&apos;s
         </p>
       </div>
     </footer>
